@@ -18,7 +18,7 @@ board([
         [null,null,null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,nullbottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null],
+        [null,null,null,null,null,null,null,nullbottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null,null],
         [null,null,null,null,null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null,null]
@@ -40,9 +40,9 @@ display_line([]):-write('').
 traduz(cell     ,'   ').
 traduz(null     ,'   ').
 traduz(space    ,'   ').
-traduz(bottom   ,' V ').
-traduz(top      ,' ^ ').
-traduz(left     ,' ` ').
+traduz(bottom   ,''\'/ ').
+traduz(top      ,' /'\'').
+traduz(left     ,' '\' ').
 traduz(right    ,' / ').
 traduz(separator,' | ').
 traduz(E1       ,'').
