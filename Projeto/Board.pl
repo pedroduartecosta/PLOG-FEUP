@@ -1,44 +1,87 @@
 board([
-        [null,null,null,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,null,null,null,null],
-        [null,null,right,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,left,null,null,null],
-        [null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null],
-        [null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null],
-        [null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null],
-        [null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null],
-        [null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null],
-        [null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null],
-        [null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null],
-        [null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null],
-        [null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null],
-        [null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null],
-        [null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null],
-        [null,null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null],
-        [null,null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null],
-        [null,null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null],
-        [null,null,null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,nullbottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,cell,separator,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,left,space,top,space,top,space,top,space,top,space,top,space,top,space,right,null,null,null,null,null,null],
-        [null,null,null,null,null,null,null,null,null,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,space,bottom,null,null,null,null,null,null,null]
+  [null,null,null,null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null]
 ]).
 
-display_board([L1|LS]):-
-  display_line(L1),nl,display_board(LS).
 
-display_board([]):-nl.
+
+display_walls(S):-
+  S > 0,
+  S1 is S - 1,
+  write(''\'  /'),
+  display_walls(S1).
+
+display_walls(S):-nl.
+
+display_walls2(S):-
+  S > 0,
+  S1 is S - 1,
+  write(' '\''),
+  write('/ '),
+  display_walls2(S1).
+
+display_walls2(S):-nl.
+
+display_spaces(SP):-
+  SP > 0,
+  SP1 is SP - 1,
+  write('  '),
+  display_spaces(SP1).
+
+display_spaces(SPA):-
+  write('').
+
+display_board_top(S):-
+  S > 0,
+  S1 is S - 1,
+  write(' /'),
+  write(''\' '),
+  display_board_top(S1).
+
+display_board_top(S):-nl.
+
+
+display_board_top2(S):-
+  S > 0,
+  S1 is S - 1,
+  write(' /  '),
+  write(''\' '),
+  display_board_top2(S1).
+
+display_board_top2(S):-nl.
+
+
+display_board([L1|LS],SIZE,SPACE):-
+  SIZE > 7,
+  SIZE1 is SIZE - 1,
+  SPACE1 is SPACE + 1,
+  display_spaces(SPACE),
+  write('|'),
+  display_line(L1),nl,
+  display_spaces(SPACE),
+  display_walls(SIZE1),
+  display_spaces(SPACE),
+  display_walls2(SIZE1),
+  display_board(LS,SIZE1,SPACE1).
+
+display_board([],SIZE,SPACE1):-nl.
 
 display_line([E1|ES]):-
   traduz(E1,V),
   write(V),
+  write('|'),
   display_line(ES).
 
 display_line([]):-write('').
 
 % TODO: when writing to the console, the space space is not being written
 traduz(cell     ,'   ').
-traduz(null     ,'   ').
+traduz(null     ,' A ').
 traduz(space    ,'   ').
 traduz(bottom   ,''\'/ ').
 traduz(top      ,' /'\'').
