@@ -25,10 +25,8 @@ read(R),R1 is R,R1<5,menu(R1).
 % -----------------------------------------------------------------------
 
 menu(X):-X==1,nl,
-write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,
-display_board_top(14),
-display_board_top2(14),
-board(T),display_board(T,14,0).
+write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
+board(T),display_board(T,14,2,1,13,0).
 
 % -----------------------------------------------------------------------
 % Menu 2 - PLAYER(BLACK) VS CPU(WHITE)
