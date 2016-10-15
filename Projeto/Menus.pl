@@ -25,24 +25,29 @@ read(R),R1 is R,R1<5,menu(R1).
 % -----------------------------------------------------------------------
 
 menu(X):-X==1,nl,
+%init_matrix(Columns,Rows,Board),
+init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
-board(T),display_board(T,14,2,1,13,0).
+%display_board(Board,Size+1,InitialIndentation,BooleanForDisplayingTopRow,InitialIndex-1)
+display_board(T,14,2,1,0).
 
 % -----------------------------------------------------------------------
 % Menu 2 - PLAYER(BLACK) VS CPU(WHITE)
 % -----------------------------------------------------------------------
 
 menu(X):-X==2,use_module(library(random)),nl,
+init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS CPU(WHITE) '),nl,
-board(T),display_board(T).
+display_board(T,14,2,1,0).
 
 % -----------------------------------------------------------------------
 % MENU 3 - CPU(BLACK) VS CPU(WHITE)
 % -----------------------------------------------------------------------
 
 menu(X):-X==3,use_module(library(random)),nl,
+init_matrix(13,7,T),
 write(' CPU(BLACK) VS CPU(WHITE) '),nl,
-board(T),display_board(T).
+display_board(T,14,2,1,0).
 
 % -----------------------------------------------------------------------
 % Exit GAME

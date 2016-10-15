@@ -8,24 +8,20 @@ board([
   [null,null,null,null,null,null,null]
 ]).
 
-%TODO: Implementar tabuleiro dinamico
-/*
-append([], List, List).
-append([Head|Tail], List, [Head|Rest]) :-append(Tail, List, Rest).
 
-dynamic_board([]).
+init_list(R, [ ]) :-
+    R =< 0, !.
+init_list(R, [_ | T]) :-
+    R > 0,
+    R2 is R - 1,
+    init_list(R2, T).
 
-create_dynamic_board(0, HEIGHT, Board).
-create_dynamic_board(WIDTH, HEIGHT, [X | Xs]):-
-    create_line(HEIGHT, Xs),
-    NewWidth is WIDTH -1,
-    create_dynamic_board(NewWidth, HEIGHT, [X, []]).
-
-create_line(0, Board).
-create_line(HEIGHT, [X]):-
-  NewHeight is HEIGHT - 1,
-  create_line(NewHeight, [X, null]).
-*/
+init_matrix(_, R, []) :-
+    R =< 0, !.
+init_matrix(C, R, [H|T]) :-
+    init_list(C,H),
+    R2 is R - 1,
+    init_matrix(C-1, R2, T).
 
 
 
@@ -108,7 +104,7 @@ display_board_top2(S):-
 display_board_top2(S):-nl.
 
 
-display_board([L1|LS],SIZE,SPACE,TOP,S,SI):-
+display_board([L1|LS],SIZE,SPACE,TOP,SI):-
   SIZE > 7,
   SIZE1 is SIZE - 1,
   SPACE1 is SPACE + 1,
@@ -116,9 +112,9 @@ display_board([L1|LS],SIZE,SPACE,TOP,S,SI):-
 %  display_spaces(SPACE),
 %  display_top_index(SI,S),
   display_spaces(SPACE),
-  display_board_top(S),
+  display_board_top(SIZE-1),
   display_spaces(SPACE),
-  display_board_top2(S),
+  display_board_top2(SIZE-1),
   INDEX is SPACE1 -  2,
   write(INDEX),
   display_spaces(SPACE-1),
@@ -128,9 +124,9 @@ display_board([L1|LS],SIZE,SPACE,TOP,S,SI):-
   display_walls(SIZE1,SI),
   display_spaces(SPACE),
   display_walls2(SIZE1),
-  display_board(LS,SIZE1,SPACE1,0,S,SI).
+  display_board(LS,SIZE1,SPACE1,0,SI).
 
-  display_board([L1|LS],SIZE,SPACE,TOP,S,SI):-
+  display_board([L1|LS],SIZE,SPACE,TOP,SI):-
     SIZE > 7,
     SIZE1 is SIZE - 1,
     SPACE1 is SPACE + 1,
@@ -143,9 +139,9 @@ display_board([L1|LS],SIZE,SPACE,TOP,S,SI):-
     display_walls(SIZE1,SI),
     display_spaces(SPACE),
     display_walls2(SIZE1),
-    display_board(LS,SIZE1,SPACE1,0,S,SI).
+    display_board(LS,SIZE1,SPACE1,0,SI).
 
-display_board([],SIZE,SPACE1,TOP,S,SI):-nl.
+display_board([],SIZE,SPACE1,TOP,SI):-nl.
 
 display_line([E1|ES]):-
   traduz(E1,V),
@@ -155,6 +151,7 @@ display_line([E1|ES]):-
 
 display_line([]):-write('').
 
-
 traduz(null     ,'   ').
+traduz(b        ,' B ').
+traduz(p        ,' P ').
 traduz(E1       ,'').
