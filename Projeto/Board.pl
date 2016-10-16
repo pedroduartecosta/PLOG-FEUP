@@ -1,9 +1,9 @@
 board([
   [null,null,null,null,null,null,null,null,null,null,null,null,null],
-  [null,null,null,null,p,null,null,null,null,null,null,null],
-  [null,null,null,p,b,null,null,null,null,null,null],
-  [null,null,null,b,p,null,null,null,null,null],
-  [null,null,null,b,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null,null],
+  [null,null,null,null,null,null,null,null,null],
   [null,null,null,null,null,null,null,null],
   [null,null,null,null,null,null,null]
 ]).
