@@ -130,6 +130,6 @@ init_matrix(C, R, [H|T]) :-
     display_line([]):-write('').
 
     traduz(null     ,'   ').
-    traduz(b        ,' B ').
-    traduz(p        ,' P ').
+    traduz(b        ,' X ').
+    traduz(p        ,' O ').
     traduz(E1       ,'').

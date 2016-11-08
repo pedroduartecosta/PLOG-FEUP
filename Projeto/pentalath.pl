@@ -1,6 +1,7 @@
 :- include('Menus.pl').
 :- include('Utilities.pl').
 :- include('Board.pl').
+:- include('Logica.pl').
 
 
 %--------------------------------%

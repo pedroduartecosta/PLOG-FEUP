@@ -29,7 +29,11 @@ menu(X):-X==1,nl,
 init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
 %display_board(Board,Size+1,InitialIndentation,BooleanForDisplayingTopRow,InitialIndex-1)
-display_board(T,14,2,1,0).
+display_board(T,14,2,1,0),
+replace(T,2,1,p,Z),
+display_board(Z,14,2,1,0),
+replace(Z,2,1,b,Y),
+display_board(Y,14,2,1,0).
 
 % -----------------------------------------------------------------------
 % Menu 2 - PLAYER(BLACK) VS CPU(WHITE)
