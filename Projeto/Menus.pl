@@ -29,14 +29,9 @@ menu(X):-X==1,nl,
 init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
 %display_board(Board,Size+1,InitialIndentation,BooleanForDisplayingTopRow,InitialIndex-1)
-display_board(T,14,2,1,0),
-replace(T,2,1,b,Z),
-replace(Z,2,2,b,Y),
-replace(Y,2,3,b,W),
-replace(W,2,4,b,H),
-replace(H,2,5,b,O),
-replace(O,2,1,b,P),
-verify_horizontal(P,b,3,3,2,14,0),
+
+% playGame(Board, MAX_X, MAX_Y, PLAYER)
+playGame(T,13,7,p).
 display_board(P,14,2,1,0).
 
 % -----------------------------------------------------------------------

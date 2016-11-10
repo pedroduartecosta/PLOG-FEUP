@@ -52,37 +52,68 @@ verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
   write(' WON'),nl.
 
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-    COUNT > 0,
-    MAX_X > 0,
-    return_value(T, X, Y, R),
-    traduz(R,V),
-    write(V),
-    R=PLAYER,
-    COUNT1 is COUNT - 1,
-    MAX_X1 is MAX_X-1,
-    X1 is X+1,
-    verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+  COUNT > 0,
+  MAX_X > 0,
+  return_value(T, X, Y, R),
+  traduz(R,V),
+  write(V),
+  R=PLAYER,
+  COUNT1 is COUNT - 1,
+  MAX_X1 is MAX_X-1,
+  X1 is X+1,
+  verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
 
-  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-    COUNT > 0,
-    MAX_X > 0,
-    return_value(T, X, Y, R),
-    traduz(R,V),
-    write(V),
-    COUNT1 is 5,
-    MAX_X1 is MAX_X-1,
-    X1 is X+1,
-    verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+  COUNT > 0,
+  MAX_X > 0,
+  return_value(T, X, Y, R),
+  traduz(R,V),
+  write(V),
+  COUNT1 is 5,
+  MAX_X1 is MAX_X-1,
+  X1 is X+1,
+  verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
 
-  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-    COUNT > 0,
-    write('Next move'),nl.
+verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+  COUNT > 0,
+  write('Next move'),nl.
 
-  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-    MAX_X > 0,
-    write('PLAYER '),
-    write(PLAYER),
-    write('WON !'),nl.
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+  MAX_X > 0,
+  write('PLAYER '),
+  write(PLAYER),
+  write('WON !'),nl.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+playGame(T, MAX_X, MAX_Y, b):-
+  write('It is player '),
+  write(b),
+  write(' turn.'),nl,
+  display_board(T,14,2,1,0),
+  write('X coordinate to place disk'),nl,
+  read(X),X1 is X,X1<14,
+  write('Y coordinate to place disk'),nl,
+  read(Y),Y1 is Y,Y1<14,
+  replace(T,Y,X,b,B),
+  verify_horizontal(B,b,X,X,Y,MAX_X,COUNT),
+  COUNT < 5,
+  display_board(B,14,2,1,0),
+  playGame(T, MAX_X, MAX_Y, p).
+
+
+playGame(T, MAX_X, MAX_Y, p):-
+  write('It is player '),
+  write(p),
+  write(' turn.'),nl,
+  display_board(T,14,2,1,0),
+  write('X coordinate to place disk'),nl,
+  read(X),X1 is X,X1<14,
+  write('Y coordinate to place disk'),nl,
+  read(Y),Y1 is Y,Y1<14,
+  replace(T,Y,X,p,B),
+  verify_horizontal(B,p,X,X,Y,MAX_X,COUNT),
+  COUNT < 5,
+  display_board(B,14,2,1,0),
+  playGame(T, MAX_X, MAX_Y, b).
