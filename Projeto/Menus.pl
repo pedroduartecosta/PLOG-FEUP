@@ -31,8 +31,13 @@ write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
 %display_board(Board,Size+1,InitialIndentation,BooleanForDisplayingTopRow,InitialIndex-1)
 display_board(T,14,2,1,0),
 replace(T,2,1,p,Z),
+return_value(Z,1,2,R),
+traduz(R,V),
+write(V),
+%verify_horizontal(T,p,0,2,14,5),
 display_board(Z,14,2,1,0),
 replace(Z,2,1,b,Y),
+%verify_horizontal(T,b,0,2,14,5),
 display_board(Y,14,2,1,0).
 
 % -----------------------------------------------------------------------
