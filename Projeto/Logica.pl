@@ -23,31 +23,66 @@ return_value_line([C|Cs], X, R):- X>0, X1 is X-1, return_value_line(Cs, X1, R).
 
 
 % verifica se existem 5 peças seguidas horizontalmente à coordenada Y
-verify_horizontal(T,PLAYER,X, Y, MAX_X, COUNT):-
-  COUNT > 0,
-  MAX_X > 0,
-  return_value(T, X, Y, R),
-  R==PLAYER,
-  COUNT1 is COUNT - 1,
-  MAX_X1 is MAX_X-1,
-  X1 is X+1,
-  verify_horizontal(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+  COUNT < 5,
+  COUNT_RIGHT_MOVES is 1,
+  X > 0,
+  return_value(T,X,Y,R),
+  R=PLAYER,
+  COUNT1 is COUNT+1,
+  X1 is X-1,
+  verify_horizontal(T, PLAYER,INITIAL_X, X1, Y, MAX_X, COUNT1).
 
-verify_horizontal(T,PLAYER,X, Y, MAX_X, MAX_Y, COUNT):-
-  COUNT > 0,
-  MAX_X > 0,
-  return_value(T, X, Y, R),
-  COUNT1 is 5,
-  MAX_X1 is MAX_X-1,
-  X1 is X+1,
-  verify_horizontal(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+  COUNT < 5,
+  INITIAL_X1 is INITIAL_X+1,
+  INITIAL_X1 < MAX_X,
+  return_value(T, INITIAL_X1, Y, R),
+  R=PLAYER,
+  COUNT1 is COUNT+1,
+  verify_horizontal(T, PLAYER,INITIAL_X1, X, Y, MAX_X, COUNT1).
 
-verify_horizontal(T,PLAYER,X, Y, MAX_X, MAX_Y, COUNT):-
-  MAX_X > 0,
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+  COUNT < 5,
+  write('NEXT MOVE.'),nl.
+
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
   write('PLAYER '),
   write(PLAYER),
-  write('WON !'),nl.
+  write(' WON'),nl.
 
-verify_horizontal(T,PLAYER,X, Y, MAX_X, MAX_Y, COUNT):-
-  COUNT > 0,
-  write('Next move'),nl.
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+    COUNT > 0,
+    MAX_X > 0,
+    return_value(T, X, Y, R),
+    traduz(R,V),
+    write(V),
+    R=PLAYER,
+    COUNT1 is COUNT - 1,
+    MAX_X1 is MAX_X-1,
+    X1 is X+1,
+    verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+
+  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+    COUNT > 0,
+    MAX_X > 0,
+    return_value(T, X, Y, R),
+    traduz(R,V),
+    write(V),
+    COUNT1 is 5,
+    MAX_X1 is MAX_X-1,
+    X1 is X+1,
+    verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
+
+  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+    COUNT > 0,
+    write('Next move'),nl.
+
+  verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
+    MAX_X > 0,
+    write('PLAYER '),
+    write(PLAYER),
+    write('WON !'),nl.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
