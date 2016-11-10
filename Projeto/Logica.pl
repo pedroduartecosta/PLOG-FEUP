@@ -91,13 +91,13 @@ playGame(T, MAX_X, MAX_Y, b, COUNT):-
   write('It is player '),
   write(b),
   write(' turn.'),nl,
-  display_board(T,14,2,1,0),
-  write('X coordinate to place disk'),nl,
-  read(X),X1 is X,X1<14,
+  %display_board(T,14,2,1,0),
   write('Y coordinate to place disk'),nl,
-  read(Y),Y1 is Y,Y1<14,
-  replace(T,Y,X,b,B),
-  verify_horizontal(B,b,X,X,Y,MAX_X,COUNT),
+  read(Y),Y1 is Y-1,Y1<(MAX_Y),
+  write('X coordinate to place disk'),nl,
+  read(X),X1 is X-1,X1<(MAX_X),
+  replace(T,Y1,X1,b,B),
+  verify_horizontal(B,b,X1,X1,Y1,MAX_X,COUNT),
   COUNT < 5,
   display_board(B,14,2,1,0),
   playGame(B, MAX_X, MAX_Y, p, COUNT).
@@ -108,12 +108,24 @@ playGame(T, MAX_X, MAX_Y, p, COUNT):-
   write(p),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
-  write('X coordinate to place disk'),nl,
-  read(X),X1 is X,X1<14,
   write('Y coordinate to place disk'),nl,
-  read(Y),Y1 is Y,Y1<14,
-  replace(T,Y,X,p,B),
-  verify_horizontal(B,p,X,X,Y,MAX_X,COUNT),
+  read(Y),Y1 is Y-1,Y1<(MAX_Y),
+  write('X coordinate to place disk'),nl,
+  read(X),X1 is X-1,X1<(MAX_X),
+  replace(T,Y1,X1,p,B),
+  verify_horizontal(B,p,X1,X1,Y1,MAX_X,COUNT),
   COUNT < 5,
   display_board(B,14,2,1,0),
   playGame(B, MAX_X, MAX_Y, b, COUNT).
+
+
+playGame(T, MAX_X, MAX_Y, b, COUNT):-
+  COUNT < 5,
+  write('OUT OF RANGE'),nl.
+
+
+playGame(T, MAX_X, MAX_Y, b, COUNT):-
+  write('PLARYE b WON'),nl.
+
+playGame(T, MAX_X, MAX_Y, p, COUNT):-
+  write('PLAYER p WON'),nl.
