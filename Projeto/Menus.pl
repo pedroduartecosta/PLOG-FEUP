@@ -31,8 +31,8 @@ write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
 %display_board(Board,Size+1,InitialIndentation,BooleanForDisplayingTopRow,InitialIndex-1)
 
 % playGame(Board, MAX_X, MAX_Y, PLAYER)
-playGame(T,13,7,p).
-display_board(P,14,2,1,0).
+playGame(T,13,7,p,0).
+%display_board(P,14,2,1,0).
 
 % -----------------------------------------------------------------------
 % Menu 2 - PLAYER(BLACK) VS CPU(WHITE)

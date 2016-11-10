@@ -87,7 +87,7 @@ verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
   write('WON !'),nl.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-playGame(T, MAX_X, MAX_Y, b):-
+playGame(T, MAX_X, MAX_Y, b, COUNT):-
   write('It is player '),
   write(b),
   write(' turn.'),nl,
@@ -100,10 +100,10 @@ playGame(T, MAX_X, MAX_Y, b):-
   verify_horizontal(B,b,X,X,Y,MAX_X,COUNT),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(T, MAX_X, MAX_Y, p).
+  playGame(B, MAX_X, MAX_Y, p, COUNT).
 
 
-playGame(T, MAX_X, MAX_Y, p):-
+playGame(T, MAX_X, MAX_Y, p, COUNT):-
   write('It is player '),
   write(p),
   write(' turn.'),nl,
@@ -116,4 +116,4 @@ playGame(T, MAX_X, MAX_Y, p):-
   verify_horizontal(B,p,X,X,Y,MAX_X,COUNT),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(T, MAX_X, MAX_Y, b).
+  playGame(B, MAX_X, MAX_Y, b, COUNT).
