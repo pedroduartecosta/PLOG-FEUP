@@ -77,9 +77,10 @@ verify_diagonals_right(T, PLAYER,INITIAL_Y, X, Y, MAX_Y, COUNT, GAME_END):-
     write('NEXT MOVE.'),nl.
 
   verify_diagonals_right(T, PLAYER,INITIAL_Y, X, Y, MAX_Y, COUNT, GAME_END):-
-    GAME_END is PLAYER,
+    GAME_END = PLAYER,
     write('PLAYER '),
-    write(PLAYER),
+    traduz(PLAYER,V),
+    write(V),
     write(' WON'),nl.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,20 +112,29 @@ verify_diagonals_right(T, PLAYER,INITIAL_Y, X, Y, MAX_Y, COUNT, GAME_END):-
     write('NEXT MOVE.'),nl.
 
   verify_diagonals_left(T, PLAYER,INITIAL_X, INITIAL_Y, X, Y, MAX_X, MAX_Y, COUNT_D_L, GAME_END):-
-    GAME_END is PLAYER,
+    GAME_END = PLAYER,
     write('PLAYER '),
-    write(PLAYER),
+    traduz(PLAYER,V),
+    write(V),
     write(' WON'),nl.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
   GAME_END == b,
-  write('PLAYER b WON'),nl.
+  write('PLAYER '),
+  traduz(GAME_END,V),
+  write(V),
+  write(' WON'),nl.
+  display_board(T,14,2,1,0).
 
 playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
   GAME_END == p,
-  write('PLAYER p WON'),nl.
+  write('PLAYER '),
+  traduz(GAME_END,V),
+  write(V),
+  write(' WON'),nl.
+  display_board(T,14,2,1,0).
 
 playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
   write('It is player '),
@@ -151,8 +161,8 @@ playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END):-
   getCoordinates(X,Y,MAX_X,MAX_Y, p, MODE),
   replace(T,Y,X,p,B),
   verify_horizontal(B,p,X,X,Y,MAX_X,COUNT, GAME_END),
-  verify_diagonals_right(B,b,Y,X,Y, MAX_Y,COUNT,GAME_END),
-  verify_diagonals_left(B,b,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
+  verify_diagonals_right(B,p,Y,X,Y, MAX_Y,COUNT,GAME_END),
+  verify_diagonals_left(B,p,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
   playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END).
