@@ -23,109 +23,74 @@ return_value_line([C|Cs], X, R):- X>0, X1 is X-1, return_value_line(Cs, X1, R).
 
 
 % verifica se existem 5 peças seguidas horizontalmente à coordenada Y
-verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
   COUNT < 5,
-  COUNT_RIGHT_MOVES is 1,
-  X > 0,
+  X > -1,
   return_value(T,X,Y,R),
   R=PLAYER,
   COUNT1 is COUNT+1,
   X1 is X-1,
-  verify_horizontal(T, PLAYER,INITIAL_X, X1, Y, MAX_X, COUNT1).
+  verify_horizontal(T, PLAYER,INITIAL_X, X1, Y, MAX_X, COUNT1, GAME_END).
 
-verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
   COUNT < 5,
   INITIAL_X1 is INITIAL_X+1,
   INITIAL_X1 < MAX_X,
   return_value(T, INITIAL_X1, Y, R),
   R=PLAYER,
   COUNT1 is COUNT+1,
-  verify_horizontal(T, PLAYER,INITIAL_X1, X, Y, MAX_X, COUNT1).
+  verify_horizontal(T, PLAYER,INITIAL_X1, X, Y, MAX_X, COUNT1, GAME_END).
 
-verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
   COUNT < 5,
   write('NEXT MOVE.'),nl.
 
-verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT):-
+verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
+  GAME_END is PLAYER,
   write('PLAYER '),
   write(PLAYER),
   write(' WON'),nl.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-  COUNT > 0,
-  MAX_X > 0,
-  return_value(T, X, Y, R),
-  traduz(R,V),
-  write(V),
-  R=PLAYER,
-  COUNT1 is COUNT - 1,
-  MAX_X1 is MAX_X-1,
-  X1 is X+1,
-  verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
-
-verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-  COUNT > 0,
-  MAX_X > 0,
-  return_value(T, X, Y, R),
-  traduz(R,V),
-  write(V),
-  COUNT1 is 5,
-  MAX_X1 is MAX_X-1,
-  X1 is X+1,
-  verify_horizontal2(T,PLAYER,X1,Y,MAX_X1, COUNT1).
-
-verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-  COUNT > 0,
-  write('Next move'),nl.
-
-verify_horizontal2(T,PLAYER,X, Y, MAX_X, COUNT):-
-  MAX_X > 0,
-  write('PLAYER '),
-  write(PLAYER),
-  write('WON !'),nl.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-playGame(T, MAX_X, MAX_Y, b, COUNT):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, b):-
+  write('PLAYER b WON'),nl.
+
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, p):-
+  write('PLAYER p WON'),nl.
+
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
   write('It is player '),
   write(b),
   write(' turn.'),nl,
-  %display_board(T,14,2,1,0),
-  write('Y coordinate to place disk'),nl,
-  read(Y),Y1 is Y-1,Y1<(MAX_Y),
-  write('X coordinate to place disk'),nl,
-  read(X),X1 is X-1,X1<(MAX_X),
-  replace(T,Y1,X1,b,B),
-  verify_horizontal(B,b,X1,X1,Y1,MAX_X,COUNT),
+  display_board(T,14,2,1,0),
+  getCoordinates(X,Y,MAX_X,MAX_Y, b, MODE),
+  replace(T,Y,X,b,B),
+  verify_horizontal(B,b,X,X,Y,MAX_X,COUNT, GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, p, COUNT).
+  playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END).
 
 
-playGame(T, MAX_X, MAX_Y, p, COUNT):-
+playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END):-
   write('It is player '),
   write(p),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
-  write('Y coordinate to place disk'),nl,
-  read(Y),Y1 is Y-1,Y1<(MAX_Y),
-  write('X coordinate to place disk'),nl,
-  read(X),X1 is X-1,X1<(MAX_X),
-  replace(T,Y1,X1,p,B),
-  verify_horizontal(B,p,X1,X1,Y1,MAX_X,COUNT),
+  getCoordinates(X,Y,MAX_X,MAX_Y, p, MODE),
+  replace(T,Y,X,p,B),
+  verify_horizontal(B,p,X,X,Y,MAX_X,COUNT, GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, b, COUNT).
+  playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END).
 
 
-playGame(T, MAX_X, MAX_Y, b, COUNT):-
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
   COUNT < 5,
   write('OUT OF RANGE'),nl.
 
 
-playGame(T, MAX_X, MAX_Y, b, COUNT):-
-  write('PLARYE b WON'),nl.
 
-playGame(T, MAX_X, MAX_Y, p, COUNT):-
-  write('PLAYER p WON'),nl.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
