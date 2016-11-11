@@ -29,7 +29,7 @@ menu(X):-X==1,nl,
 init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS PLAYER(WHITE) '),nl,nl,
 % playGame(Board, MAX_X, MAX_Y, PLAYER)
-playGame(T,13,7,p,0,1, null).
+playGame(T,13,7,p,0,1, GAME_END).
 
 % -----------------------------------------------------------------------
 % Menu 2 - PLAYER(BLACK) VS CPU(WHITE)
@@ -38,7 +38,7 @@ playGame(T,13,7,p,0,1, null).
 menu(X):-X==2,use_module(library(random)),nl,
 init_matrix(13,7,T),
 write(' PLAYER(BLACK) VS CPU(WHITE) '),nl,
-playGame(T,13,7,p,0,2, null).
+playGame(T,13,7,p,0,2, GAME_END).
 % -----------------------------------------------------------------------
 % MENU 3 - CPU(BLACK) VS CPU(WHITE)
 % -----------------------------------------------------------------------
@@ -46,7 +46,7 @@ playGame(T,13,7,p,0,2, null).
 menu(X):-X==3,use_module(library(random)),nl,
 init_matrix(13,7,T),
 write(' CPU(BLACK) VS CPU(WHITE) '),nl,
-playGame(T,13,7,p,0,3, null).
+playGame(T,13,7,p,0,3, GAME_END).
 
 % -----------------------------------------------------------------------
 % Exit GAME

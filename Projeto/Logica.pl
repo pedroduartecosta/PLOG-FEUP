@@ -46,23 +46,27 @@ verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
   write('NEXT MOVE.'),nl.
 
 verify_horizontal(T, PLAYER,INITIAL_X, X, Y, MAX_X, COUNT, GAME_END):-
-  GAME_END is PLAYER,
+  GAME_END = PLAYER,
   write('PLAYER '),
-  write(PLAYER),
+  traduz(PLAYER,V),
+  write(V),
   write(' WON'),nl.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, b):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
+  GAME_END == b,
   write('PLAYER b WON'),nl.
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, p):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
+  GAME_END == p,
   write('PLAYER p WON'),nl.
 
 playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
   write('It is player '),
-  write(b),
+  traduz(b,V),
+  write(V),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
   getCoordinates(X,Y,MAX_X,MAX_Y, b, MODE),
@@ -75,7 +79,8 @@ playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
 
 playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END):-
   write('It is player '),
-  write(p),
+  traduz(p,V),
+  write(V),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
   getCoordinates(X,Y,MAX_X,MAX_Y, p, MODE),
