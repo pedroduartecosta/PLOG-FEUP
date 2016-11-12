@@ -121,31 +121,33 @@ verify_diagonals_right(T, PLAYER,INITIAL_Y, X, Y, MAX_Y, COUNT, GAME_END):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, null):-
+  write('NULL'),
   VERIFY is 0.
 
-verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, I):-
+  write('verifying'),
   X < MAX_X,
   Y < MAX_Y,
   return_value(T, X, Y, R),
   X1 is X+1,
   verify_full_board(T, X1, Y, MAX_X, MAX_Y, VERIFY, R).
 
-verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, I):-
   Y < MAX_Y,
   Y1 is Y+1,
   MAX_X1 is MAX_X-1,
-  verify_full_board(T, 0, Y1, MAX_X1, MAX_Y, VERIFY, R).
+  verify_full_board(T, 0, Y1, MAX_X1, MAX_Y, VERIFY, I).
 
-verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, I):-
   VERIFY is 2,
-  write('TABULEIRO CHEIO!').
+  write('TABULEIRO CHEIO!'),nl.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 1):-
-  verify_full_board(T, 0, 0, MAX_X, MAX_Y, VERIFY, R),
+  verify_full_board(T, 0, 0, MAX_X, MAX_Y, VERIFY, p),
   playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY).
 
 playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 2):-
@@ -175,9 +177,9 @@ playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY):-
   display_board(T,14,2,1,0),
   getCoordinates(X,Y,MAX_X,MAX_Y, b, MODE),
   replace(T,Y,X,b,B),
-  verify_horizontal(B,b,X,X,Y,MAX_X,COUNT, GAME_END),
-  verify_diagonals_right(B,b,Y,X,Y, MAX_Y,COUNT,GAME_END),
-  verify_diagonals_left(B,b,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
+  %verify_horizontal(B,b,X,X,Y,MAX_X,COUNT, GAME_END),
+  %verify_diagonals_right(B,b,Y,X,Y, MAX_Y,COUNT,GAME_END),
+  %verify_diagonals_left(B,b,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
   playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END, 1).
@@ -191,9 +193,9 @@ playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END, VERIFY):-
   display_board(T,14,2,1,0),
   getCoordinates(X,Y,MAX_X,MAX_Y, p, MODE),
   replace(T,Y,X,p,B),
-  verify_horizontal(B,p,X,X,Y,MAX_X,COUNT, GAME_END),
-  verify_diagonals_right(B,p,Y,X,Y, MAX_Y,COUNT,GAME_END),
-  verify_diagonals_left(B,p,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
+  %verify_horizontal(B,p,X,X,Y,MAX_X,COUNT, GAME_END),
+  %verify_diagonals_right(B,p,Y,X,Y, MAX_Y,COUNT,GAME_END),
+  %verify_diagonals_left(B,p,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
   playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, 1).
