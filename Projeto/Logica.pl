@@ -118,9 +118,40 @@ verify_diagonals_right(T, PLAYER,INITIAL_Y, X, Y, MAX_Y, COUNT, GAME_END):-
     write(V),
     write(' WON'),nl.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, null):-
+  VERIFY is 0.
+
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+  X < MAX_X,
+  Y < MAX_Y,
+  return_value(T, X, Y, R),
+  X1 is X+1,
+  verify_full_board(T, X1, Y, MAX_X, MAX_Y, VERIFY, R).
+
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+  Y < MAX_Y,
+  Y1 is Y+1,
+  MAX_X1 is MAX_X-1,
+  verify_full_board(T, 0, Y1, MAX_X1, MAX_Y, VERIFY, R).
+
+verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, R):-
+  VERIFY is 2,
+  write('TABULEIRO CHEIO!').
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 1):-
+  verify_full_board(T, 0, 0, MAX_X, MAX_Y, VERIFY, R),
+  playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY).
+
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 2):-
+  display_board(T,14,2,1,0).
+
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
   GAME_END == b,
   write('PLAYER '),
   traduz(GAME_END,V),
@@ -128,7 +159,7 @@ playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
   write(' WON'),nl.
   display_board(T,14,2,1,0).
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
   GAME_END == p,
   write('PLAYER '),
   traduz(GAME_END,V),
@@ -136,7 +167,7 @@ playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END):-
   write(' WON'),nl.
   display_board(T,14,2,1,0).
 
-playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY):-
   write('It is player '),
   traduz(b,V),
   write(V),
@@ -149,10 +180,10 @@ playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
   verify_diagonals_left(B,b,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END).
+  playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END, 1).
 
 
-playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END):-
+playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END, VERIFY):-
   write('It is player '),
   traduz(p,V),
   write(V),
@@ -165,10 +196,10 @@ playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END):-
   verify_diagonals_left(B,p,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END).
+  playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, 1).
 
 
-playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END):-
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY):-
   COUNT < 5,
   write('OUT OF RANGE'),nl.
 
