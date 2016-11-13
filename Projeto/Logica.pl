@@ -146,14 +146,14 @@ verify_full_board(T, X, Y, MAX_X, MAX_Y, VERIFY, I):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 1):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 1,DIFFICULTY):-
   verify_full_board(T, 0, 0, MAX_X, MAX_Y, VERIFY, p),
-  playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY).
+  playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY).
 
 playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, 2):-
   display_board(T,14,2,1,0).
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY):-
   GAME_END == b,
   write('PLAYER '),
   traduz(GAME_END,V),
@@ -161,7 +161,7 @@ playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
   write(' WON'),nl.
   display_board(T,14,2,1,0).
 
-playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
+playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY):-
   GAME_END == p,
   write('PLAYER '),
   traduz(GAME_END,V),
@@ -169,39 +169,39 @@ playGame(T, MAX_X, MAX_Y, Z, COUNT, MODE, GAME_END, VERIFY):-
   write(' WON'),nl.
   display_board(T,14,2,1,0).
 
-playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY):-
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY):-
   write('It is player '),
   traduz(b,V),
   write(V),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
-  getCoordinates(T,X,Y,MAX_X,MAX_Y, b, MODE),
+  getCoordinates(T,X,Y,MAX_X,MAX_Y, b, MODE,DIFFICULTY),
   replace(T,Y,X,b,B),
   verify_horizontal(B,b,X,X,Y,MAX_X,COUNT, GAME_END),
   verify_diagonals_right(B,b,Y,X,Y, MAX_Y,COUNT,GAME_END),
   verify_diagonals_left(B,b,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END, 1).
+  playGame(B, MAX_X, MAX_Y, p, COUNT,MODE, GAME_END, 1,DIFFICULTY).
 
 
-playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END, VERIFY):-
+playGame(T, MAX_X, MAX_Y, p, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY):-
   write('It is player '),
   traduz(p,V),
   write(V),
   write(' turn.'),nl,
   display_board(T,14,2,1,0),
-  getCoordinates(T,X,Y,MAX_X,MAX_Y, p, MODE),
+  getCoordinates(T,X,Y,MAX_X,MAX_Y, p, MODE,DIFFICULTY),
   replace(T,Y,X,p,B),
   verify_horizontal(B,p,X,X,Y,MAX_X,COUNT, GAME_END),
   verify_diagonals_right(B,p,Y,X,Y, MAX_Y,COUNT,GAME_END),
   verify_diagonals_left(B,p,X,Y,X,Y,MAX_X,MAX_Y,COUNT,GAME_END),
   COUNT < 5,
   display_board(B,14,2,1,0),
-  playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, 1).
+  playGame(B, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, 1,DIFFICULTY).
 
 
-playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY):-
+playGame(T, MAX_X, MAX_Y, b, COUNT, MODE, GAME_END, VERIFY,DIFFICULTY):-
   COUNT < 5,
   write('OUT OF RANGE'),nl.
 
