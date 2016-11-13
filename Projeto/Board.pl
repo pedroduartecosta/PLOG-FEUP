@@ -31,7 +31,7 @@ init_matrix(C, R, [H|T]) :-
       S1 is S - 1,
       S2 is SI + 1,
       write(''\' '),
-      write(S2),
+      write(' '),
       write('/'),
       display_walls(S1,S2).
 
@@ -40,7 +40,7 @@ init_matrix(C, R, [H|T]) :-
       S1 is S - 1,
       S2 is SI + 1,
       write(''\''),
-      write(S2),
+      write('  '),
       write('/'),
       display_walls(S1,S2).
 
@@ -97,7 +97,11 @@ init_matrix(C, R, [H|T]) :-
       write(INDEX),
       display_spaces(SPACE-1),
       write(' |'),
-      display_line(L1),nl,
+      display_line(L1),
+      write('  '),
+      SIZE2 is SIZE-1,
+      write(SIZE2),
+      nl,
       display_spaces(SPACE),
       display_walls(SIZE1,SI),
       display_spaces(SPACE),
@@ -112,7 +116,11 @@ init_matrix(C, R, [H|T]) :-
         write(INDEX),
         display_spaces(SPACE-1),
         write(' |'),
-        display_line(L1),nl,
+        display_line(L1),
+        write('  '),
+        SIZE2 is SIZE-1,
+        write(SIZE2),
+        nl,
         display_spaces(SPACE),
         display_walls(SIZE1,SI),
         display_spaces(SPACE),
@@ -126,7 +134,6 @@ init_matrix(C, R, [H|T]) :-
       write(V),
       write('|'),
       display_line(ES).
-
     display_line([]):-write('').
 
     traduz(null     ,'   ').
