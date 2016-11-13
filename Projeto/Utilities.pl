@@ -141,25 +141,6 @@ intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUN
 	intelligent_coordinates(T, PLAYER, X, Y1,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, 0).
 
 
-
-
-
-
-
-/*intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
-	MAX_COUNT_FOUND = COUNT_MAX,
-	random(0, MAX_Y, Y2),Y1 is Y2,Y1<(MAX_Y),
-	random(0, INITIAL_MAX_X, X2),X1 is X2,X1<(INITIAL_MAX_X-Y1),
-	RY is Y1,
-	write('AI8'),
-	RX is X1.
-
-intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
-	COUNT_MAX > 0,
-	COUNT_MAX1 is COUNT_MAX - 1,
-	intelligent_coordinates(T, PLAYER, 0, 0,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX1, FINAL_X, FINAL_Y, 0):-
-*/
-
 intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
 	write('AI9'),
 	COUNT_MAX > 0,
@@ -173,3 +154,18 @@ intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUN
 	RY is Y1,
 	write('AI4'),
 	RX is X1.
+
+
+	/*intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		MAX_COUNT_FOUND = COUNT_MAX,
+		random(0, MAX_Y, Y2),Y1 is Y2,Y1<(MAX_Y),
+		random(0, INITIAL_MAX_X, X2),X1 is X2,X1<(INITIAL_MAX_X-Y1),
+		RY is Y1,
+		write('AI8'),
+		RX is X1.
+
+	intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		COUNT_MAX > 0,
+		COUNT_MAX1 is COUNT_MAX - 1,
+		intelligent_coordinates(T, PLAYER, 0, 0,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX1, FINAL_X, FINAL_Y, 0):-
+	*/
