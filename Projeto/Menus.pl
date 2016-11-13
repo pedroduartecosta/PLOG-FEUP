@@ -47,16 +47,20 @@ playGame(T,13,7,p,0,1, GAME_END, 1,1).
 
 menu(X):-X==2,use_module(library(random)),nl,
 init_matrix(13,7,T),
-write(' PLAYER(BLACK) VS CPU(WHITE) '),nl,
-playGame(T,13,7,p,0,2, GAME_END,1,2).
+write(' PLAYER(BLACK) VS CPU(WHITE) '),nl,nl,
+write(' Set BOT difficulty(0-easy, 1-hard) '),
+read(D), D1 is D, D1 < 2,
+playGame(T,13,7,p,0,2, GAME_END,1,D1).
 % -----------------------------------------------------------------------
 % MENU 3 - CPU(BLACK) VS CPU(WHITE)
 % -----------------------------------------------------------------------
 
 menu(X):-X==3,use_module(library(random)),nl,
 init_matrix(13,7,T),
-write(' CPU(BLACK) VS CPU(WHITE) '),nl,
-playGame(T,13,7,p,0,3, GAME_END,1,1).
+write(' CPU(BLACK) VS CPU(WHITE) '),nl,nl,
+write(' Set BOT difficulty(0-easy, 1-hard) '),
+read(D), D1 is D, D1 < 2,
+playGame(T,13,7,p,0,3, GAME_END,1,D).
 
 % -----------------------------------------------------------------------
 % MENU 4 - HOW TO PLAY

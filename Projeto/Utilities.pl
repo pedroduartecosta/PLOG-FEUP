@@ -23,7 +23,7 @@ getCoordinates(T,X,Y,MAX_X,MAX_Y,Z,1,DIFFICULTY):-
 	X is X1.
 
 
-getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2,1):-
+getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2,0):-
 	random(0, MAX_Y, Y2),Y1 is Y2,Y1<(MAX_Y),
 	random(0, MAX_X, X2),X1 is X2,X1<(MAX_X-Y1),
 	return_value(T,X1,Y1,R),
@@ -31,7 +31,7 @@ getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2,1):-
 	Y is Y1,
 	X is X1.
 
-getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2,2):-
+getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2,1):-
 	intelligent_coordinates(T, b, 0, 0, RX, RY, MAX_X, MAX_X,MAX_Y, 0, 4, FINAL_X, FINAL_Y, 0),
 	return_value(T,RX,RY,R),
 	R == null,
@@ -48,13 +48,27 @@ getCoordinates(T,X,Y,MAX_X,MAX_Y,p, 2,DIFFICULTY):-
 	Y is Y1,
 	X is X1.
 
-getCoordinates(T,X,Y,MAX_X,MAX_Y,Z, 3,1):-
+getCoordinates(T,X,Y,MAX_X,MAX_Y,Z, 3,0):-
 	random(0, MAX_Y, Y2),Y1 is Y2,Y1<(MAX_Y),
 	random(0, MAX_X, X2),X1 is X2,X1<(MAX_X-Y1),
 	return_value(T,X1,Y1,R),
 	R == null,
 	Y is Y1,
 	X is X1.
+
+getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 3,1):-
+	intelligent_coordinates(T, b, 0, 0, RX, RY, MAX_X, MAX_X,MAX_Y, 0, 4, FINAL_X, FINAL_Y, 0),
+	return_value(T,RX,RY,R),
+	R == null,
+	X is RX,
+	Y is RY.
+
+getCoordinates(T,X,Y,MAX_X,MAX_Y, p, 3,1):-
+	intelligent_coordinates(T, p, 0, 0, RX, RY, MAX_X, MAX_X,MAX_Y, 0, 4, FINAL_X, FINAL_Y, 0),
+	return_value(T,RX,RY,R),
+	R == null,
+	X is RX,
+	Y is RY.
 
 updateMaxCountFound(X, Y,COUNT, FINAL_X, FINAL_Y, MAX_COUNT_FOUND, M, FX, FY):-
 	COUNT > MAX_COUNT_FOUND,
