@@ -140,10 +140,12 @@ intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUN
 	Y1 < MAX_Y,
 	intelligent_coordinates(T, PLAYER, X, Y1,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, 0).
 
-
 intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
 	write('AI9'),
 	COUNT_MAX > 0,
+	MAX_COUNT_FOUND1 is MAX_COUNT_FOUND,
+	%intelligent_coordinates_diagonal_right(T, PLAYER, X, Y, RX, RY, INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, Final_X, Final_Y, MAX_C_FOUND),
+	%MAX_COUNT_FOUND1 < MAX_C_FOUND,
 	COUNT_MAX1 is COUNT_MAX-1,
 	intelligent_coordinates(T, PLAYER, 0, 0,RX, RY,INITIAL_MAX_X, INITIAL_MAX_X, MAX_Y, 0, COUNT_MAX1, FINAL_X, FINAL_Y, 0).
 
@@ -155,7 +157,67 @@ intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUN
 	write('AI4'),
 	RX is X1.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+/*intelligent_coordinates_diagonal_right(T, PLAYER, X, Y, RX, RY, INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, Final_X, Final_Y, MAX_COUNT_FOUND):-
+	COUNT < COUNT_MAX,
+	Y < MAX_Y,
+	X < MAX_X,
+	return_value(T,X,Y,R),
+	R=PLAYER,
+	COUNT1 is COUNT+1,
+	updateMaxCountFound(X, Y,COUNT1, FINAL_X, FINAL_Y, MAX_COUNT_FOUND, M, FX, FY),
+	Y1 is Y+1,
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y1,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT1, COUNT_MAX, FX, FY, M).
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		COUNT < COUNT_MAX,
+		X < MAX_X,
+		Y < MAX_Y,
+		Y1 is Y+1,
+		intelligent_coordinates_diagonal_right(T, PLAYER, X, Y1,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND).
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		COUNT < COUNT_MAX,
+		X < MAX_Y,
+		X1 is X+1,
+		write('AI3'),
+		intelligent_coordinates_diagonal_right(T, PLAYER, X1, 0,RX, RY,INITIAL_MAX_X, MAX_X1, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND).
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		MAX_COUNT_FOUND = COUNT_MAX,
+		return_value(T,FINAL_X+1,FINAL_Y,R),
+		R \= p,
+		R \= b,
+		RX is FINAL_X+1,
+		write('AI6'),
+		RY is FINAL_Y.
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		MAX_COUNT_FOUND = COUNT_MAX,
+		Y1 is FINAL_Y-COUNT_MAX,
+		return_value(T,FINAL_X,Y1,R),
+		R \= p,
+		R \= b,
+		RX is X1,
+		write('AI7'),
+		RY is FINAL_Y.
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		MAX_COUNT_FOUND = COUNT_MAX,
+		Y1 is Y+1,
+		Y1 < MAX_Y,
+		intelligent_coordinates_diagonal_right(T, PLAYER, X1, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, 0).
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		MAX_COUNT_FOUND = COUNT_MAX,
+		X1 is X+1,
+		X1 < MAX_X,
+		intelligent_coordinates_diagonal_right(T, PLAYER, X, Y1,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, 0, COUNT_MAX, FINAL_X, FINAL_Y, 0).
+
+	intelligent_coordinates_diagonal_right(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
+		COUNT_MAX = 0.
+*/
 	/*intelligent_coordinates(T, PLAYER, X, Y,RX, RY,INITIAL_MAX_X, MAX_X, MAX_Y, COUNT, COUNT_MAX, FINAL_X, FINAL_Y, MAX_COUNT_FOUND):-
 		MAX_COUNT_FOUND = COUNT_MAX,
 		random(0, MAX_Y, Y2),Y1 is Y2,Y1<(MAX_Y),
