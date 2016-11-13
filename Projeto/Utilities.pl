@@ -41,7 +41,7 @@ displayList2([H|TAIL]):-
 
 getCoordinates(T,X,Y,MAX_X,MAX_Y,Z,1):-
 	listOfMoves(T, 0, 0, MAX_X, MAX_Y, M),
-	displayList(M),
+	displayList(M),nl,
 	write('Y coordinate to place disk'),nl,
 	read(Y2),Y1 is Y2-1,Y1<(MAX_Y),
 	write('X coordinate to place disk'),nl,
@@ -62,7 +62,7 @@ getCoordinates(T,X,Y,MAX_X,MAX_Y, b, 2):-
 
 getCoordinates(T,X,Y,MAX_X,MAX_Y,p, 2):-
 	listOfMoves(T, 0, 0, MAX_X, MAX_Y, M),
-	displayList(M),
+	displayList(M),nl,
 	write('Y coordinate to place disk'),nl,
 	read(Y2),Y1 is Y2-1,Y1<(MAX_Y),
 	write('X coordinate to place disk'),nl,
