@@ -1,8 +1,10 @@
 :- include('board.pl').
 :- include('utilities.pl').
+:- include('logica.pl').
+:- use_module(library(clpfd)).
+:- use_module(library(lists)).
+:- use_module(library(random)).
 
 yinyang:-
-  use_module(library(random)),
-  %init_matrix(length X, length_Y, Board)
-  init_board(6,6,T),
-  display_board(R,6).
+  init_board(T,6,6),
+  display_board(T,6,6).
