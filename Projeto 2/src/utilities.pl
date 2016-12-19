@@ -9,7 +9,7 @@ replace_line([b|Cs],0,Z,[b|Cs]):-
 replace_line([_|Cs],0,Z,[Z|Cs]).
 replace_line([C|Cs],X,Z,[C|Rs]):-X > 0, X1 is X-1, replace_line(Cs,X1,Z,Rs).
 
-placeRandomPiece(T,X,Y,R):-
+place_piece(T,X,Y,R):-
 	random(0, X, Y1),
 	random(0, Y, X1),
   random(0, 1, P),

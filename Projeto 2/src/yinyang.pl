@@ -7,4 +7,6 @@
 
 yinyang:-
   init_board(T,6,6),
+  display_board(T,6,6),
+  place_random_pieces(T,6,6),
   display_board(T,6,6).
