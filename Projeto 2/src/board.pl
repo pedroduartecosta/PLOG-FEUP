@@ -1,10 +1,10 @@
-default_board([
-  [A1,A2,A3,A4,A5,A6],
-  [B1,B2,B3,B4,B5,B6],
-  [C1,C2,C3,C4,C5,C6],
-  [D1,D2,D3,D4,D5,D6],
-  [E1,E2,E3,E4,E5,E6],
-  [F1,F2,F3,F4,F5,F6]
+default_board(
+  [A1,A2,A3,A4,A5,A6,
+  B1,1,0,B4,B5,B6,
+  C1,0,0,C4,1,C6,
+  D1,D2,1,1,D5,D6,
+  E1,E2,0,E4,E5,E6,
+  F1,F2,F3,F4,F5,F6
 ]).
 
 display_board(L,Size,_,0):-
