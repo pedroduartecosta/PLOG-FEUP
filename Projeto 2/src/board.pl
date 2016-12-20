@@ -1,48 +1,32 @@
 default_board([
-  [null,null,null,null,null,null],
-  [null,null,null,null,null,null],
-  [null,null,null,null,null,null],
-  [null,null,null,null,null,null],
-  [null,null,null,null,null,null],
-  [null,null,null,null,null,null]
+  [A1,A2,A3,A4,A5,A6],
+  [B1,B2,B3,B4,B5,B6],
+  [C1,C2,C3,C4,C5,C6],
+  [D1,D2,D3,D4,D5,D6],
+  [E1,E2,E3,E4,E5,E6],
+  [F1,F2,F3,F4,F5,F6]
 ]).
 
-init_board(_,_,0).
+display_board(L,Size,_,0):-
+  write('finished'),nl.
 
-init_board([H|Tail], NCol,NLin):-
-  length(H,NCol),
-  domain(H,0,2),
-  NLin1 is NLin - 1,
-  init_board(Tail,NCol,NLin1).
+display_board(L,Size,0,Counter):-
+  Counter1 is Counter - 1,
+  write('|'),nl,
+  LineSize is Size,
+  display_board(L,Size,LineSize,Counter1).
 
-display_board([],Size,0):-
-  display_walls(Size).
-
-display_board([L1|Ls],Size,Size1):-
-  display_walls(Size),nl,
+display_board([H|Tail],Size,LineSize,Counter):-
+  Counter > 0,
   write('|'),
-  display_line(L1),nl,
-  Size2 is Size1 - 1,
-  display_board(Ls,Size,Size2).
-
-
-
-display_walls(Size):-
-  Size>0,
-  Size1 is Size-1,
-  write('----'),
-  display_walls(Size1).
-display_walls(0).
-
-display_line([E1|ES]):-
-  traduz(E1,V),
+  traduz(H,V),
   write(V),
-  write('|'),
-  display_line(ES).
-display_line([]):-write('').
+  Size1 is LineSize - 1,
+  display_board(Tail,Size,Size1,Counter).
 
 
-traduz(E1       ,'   ').
+
 traduz(2        ,' 2 ').
 traduz(0        ,' 0 ').
 traduz(1        ,' 1 ').
+traduz(E1       ,'   ').
