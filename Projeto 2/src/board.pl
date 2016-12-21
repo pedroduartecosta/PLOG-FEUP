@@ -1,10 +1,10 @@
 default_board(
   [A1,A2,A3,A4,A5,A6,
-  B1,1,0,B4,B5,B6,
-  C1,0,0,C4,1,C6,
-  D1,D2,1,1,D5,D6,
-  E1,E2,0,E4,E5,E6,
-  F1,F2,F3,F4,F5,F6
+  B1,B2,B3,0,B5,B6,
+  C1,C2,0,0,1,C6,
+  D1,1,D3,D4,1,1,
+  0,E2,1,E4,0,E6,
+  F1,0,F3,F4,F5,0
 ]).
 
 display_board(L,Size,_,0):-

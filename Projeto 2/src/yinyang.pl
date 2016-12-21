@@ -9,12 +9,10 @@ yinyang(Size):-
   TotalSize is Size*Size,
   default_board(L),
   domain(L,0,1),
-  place_random_pieces(L,TotalSize,Size,Size),
   square(L,1,Size,TotalSize),
-  connected(L,1,Size,TotalSize),
+  connected(L,1,Size,TotalSize,40),
   labeling([],L),
   display_board(L,Size,Size,Size).
-
 
 
 square(L,Index,Size,TotalSize):-
@@ -33,7 +31,8 @@ square(L,Index,Size,TotalSize):-
   square(L,Index1,Size,TotalSize).
 square(_,_,_,_).
 
-connected(L,Index,Size,TotalSize):-
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -48,10 +47,13 @@ connected(L,Index,Size,TotalSize):-
   element(Index2,L,C),
   element(Index3,L,D),
   element(Index4,L,E),
-  (A#=B #\/ A#=C #\/ A#=D #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])) #\/
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])) #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -63,10 +65,13 @@ connected(L,Index,Size,TotalSize):-
   element(Index1,L,B),
   element(Index2,L,C),
   element(Index3,L,D),
-  (A#=B #\/ A#=C #\/ A#=D),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])) #\/
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -78,10 +83,12 @@ connected(L,Index,Size,TotalSize):-
   element(Index1,L,B),
   element(Index2,L,C),
   element(Index4,L,E),
-  (A#=B #\/ A#=C #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])) #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index3 is Index - 1,
@@ -93,10 +100,13 @@ connected(L,Index,Size,TotalSize):-
   element(Index1,L,B),
   element(Index3,L,D),
   element(Index4,L,E),
-  (A#=B #\/ A#=D #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])) #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -109,10 +119,13 @@ connected(L,Index,Size,TotalSize):-
   element(Index2,L,C),
   element(Index3,L,D),
   element(Index4,L,E),
-  (A#=C #\/ A#=D #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])) #\/
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])) #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -121,10 +134,12 @@ connected(L,Index,Size,TotalSize):-
   element(Index,L,A),
   element(Index1,L,B),
   element(Index2,L,C),
-  (A#=B #\/ A#=C),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index2 is Index + Size,
@@ -134,10 +149,12 @@ connected(L,Index,Size,TotalSize):-
   element(Index,L,A),
   element(Index2,L,C),
   element(Index3,L,D),
-  (A#=C #\/ A#=D),
-  connected(L,Index1,Size,TotalSize).
+  (A#=C, connected(L,Index2,Size,TotalSize,[Index,Visited])) #\/
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index4 is Index - Size,
@@ -146,10 +163,12 @@ connected(L,Index,Size,TotalSize):-
   element(Index,L,A),
   element(Index1,L,B),
   element(Index4,L,E),
-  (A#=B #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=B, connected(L,Index1,Size,TotalSize,[Index,Visited]))  #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
 
-connected(L,Index,Size,TotalSize):-
+
+connected(L,Index,Size,TotalSize,Visited):-
+  \+member(Index,Visited),
   Index \= TotalSize,
   Index1 is Index + 1,
   Index3 is Index - 1,
@@ -159,7 +178,8 @@ connected(L,Index,Size,TotalSize):-
   element(Index,L,A),
   element(Index3,L,D),
   element(Index4,L,E),
-  (A#=D #\/ A#=E),
-  connected(L,Index1,Size,TotalSize).
+  (A#=D, connected(L,Index3,Size,TotalSize,[Index,Visited])) #\/
+  (A#=E, connected(L,Index4,Size,TotalSize,[Index,Visited])).
+
 
 connected(_,_,_,_).
