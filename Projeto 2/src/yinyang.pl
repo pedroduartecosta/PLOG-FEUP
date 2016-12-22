@@ -16,4 +16,5 @@ yinyang(Size):-
   labeling([ffc],L),
   display_walls(Size),
   display_board(L,Size,Size,Size),
-  print_time.
+  print_time,
+  fd_statistics.
