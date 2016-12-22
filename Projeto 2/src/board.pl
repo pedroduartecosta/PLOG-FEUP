@@ -7,12 +7,12 @@ default_board(
   F1,F2,F3,F4,F5,F6
 ]).
 
-display_board(L,Size,_,0):-
-  write('finished'),nl.
+display_board(L,Size,_,0).
 
 display_board(L,Size,0,Counter):-
   Counter1 is Counter - 1,
   write('|'),nl,
+  display_walls(Size),
   LineSize is Size,
   display_board(L,Size,LineSize,Counter1).
 
@@ -24,9 +24,15 @@ display_board([H|Tail],Size,LineSize,Counter):-
   Size1 is LineSize - 1,
   display_board(Tail,Size,Size1,Counter).
 
+display_walls(0):-nl.
+display_walls(Size):-
+  Size > 0,
+  write('----'),
+  Size1 is Size - 1,
+  display_walls(Size1).
 
 
 traduz(2        ,' 2 ').
-traduz(0        ,' 0 ').
-traduz(1        ,' 1 ').
+traduz(0        ,' O ').
+traduz(1        ,' X ').
 traduz(E1       ,'   ').

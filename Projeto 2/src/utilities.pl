@@ -1,16 +1,19 @@
-replace([L|Ls],0,X,Z,[R|Ls]):-replace_line(L,X,Z,R).
-replace([L|Ls],Y,X,Z,[L|Rs]):-Y > 0, Y1 is Y-1, replace(Ls,Y1,X,Z,Rs).
+place_random_pieces(_,_,0,UsedPieces).
 
-replace_line([p|Cs],0,Z,[p|Cs]):-
-  write('FALSE MOVE'),nl.
-replace_line([b|Cs],0,Z,[b|Cs]):-
-  write('FALSE MOVE'),nl.
+place_random_pieces(T,TotalSize,Pieces,UsedPieces):-
+  random(0, TotalSize, Index),
+  random(0,2,P),
+  \+ member(Index,UsedPieces),
+  element(Index,T,P),
+  Pieces1 is Pieces - 1,
+  place_random_pieces(T,TotalSize,Pieces1,[Index|UsedPieces]).
 
-replace_line([_|Cs],0,Z,[Z|Cs]).
-replace_line([C|Cs],X,Z,[C|Rs]):-X > 0, X1 is X-1, replace_line(Cs,X1,Z,Rs).
+place_random_pieces(T,TotalSize,Pieces,UsedPieces):-
+  place_random_pieces(T,TotalSize,Pieces,UsedPieces).
 
-place_piece(T,X,Y,R):-
-	random(0, X, Y1),
-	random(0, Y, X1),
-  random(0, 1, P),
-  replace(T,Y1,X1,P,R).
+reset_timer :- statistics(walltime,_).
+
+print_time :-
+	statistics(walltime,[_,T]),
+	TS is ((T//10)*10)/1000,
+  nl, write('Solution Time: '), write(TS), write('s'), nl, nl.
